@@ -169,8 +169,6 @@
   .arc-wrap{margin-top:26px;overflow-x:auto;padding-bottom:6px;}
   .arc{display:flex;align-items:flex-end;gap:0;min-width:560px;position:relative;height:120px;}
   .arc-node{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;background:none;border:none;padding:0;}
-  .arc-node .line{position:absolute;top:38px;left:50%;width:100%;height:2px;background:var(--border);z-index:0;}
-  .arc-node:last-child .line{display:none;}
   .dot{
     width:22px;height:22px;border-radius:50%;border:2px solid var(--border);
     background:var(--panel-alt);z-index:1;transition:all .2s;
@@ -325,19 +323,14 @@
       <div class="hero">
         <div class="hero-kicker">SEE. FREE. GO.</div>
         <h2>Face Your Power is a mental-performance method for elite athletes. It is a training system — the same discipline you already bring to your physical training, now applied to your mind.</h2>
-        <p class="sub">Your private training log for the 10-week pilot. Module instructions and the data guide are in Notion. A short entry after training is enough.</p>
+        <p class="sub">Your private training log for the 10-week pilot. Module instructions live in your weekly materials. A short entry after training is enough.</p>
 
-        <div class="quick-actions"><button class="btn" type="button" data-jump="momentlog">Capture a quick moment</button><button class="btn ghost" type="button" data-jump="regbridge">Log a reset</button><button class="btn ghost" type="button" data-jump="modulelog">Log module practice</button><button class="btn ghost" type="button" data-jump="coretools">Open Core Tools</button></div>
         <p class="quick-note">Use Quick Moment during or after training. Practice logs your weekly module. Core Tools — including the Learning Engine — are there whenever you want to go deeper. Deep Reflection is for a difficult moment or a recurring pattern.</p>
         <div class="cycle-map" aria-label="Performance Cycle">
           <div class="cycle-step"><strong>AWARENESS</strong><span>Notice</span></div>
           <div class="cycle-step"><strong>REGULATION</strong><span>Reset</span></div>
           <div class="cycle-step"><strong>CHOICE</strong><span>Direct</span></div>
           <div class="cycle-step"><strong>PERFORMANCE</strong><span>Act</span></div>
-        </div>
-        <div class="engine-band">
-          <div class="engine-title">THE FYP LEARNING ENGINE</div>
-          <p>EXPERIENCE → REFLECT → LEARN → ADAPT. Every completed performance becomes useful input for the next cycle.</p>
         </div>
 
         <div class="arc-wrap">
@@ -361,7 +354,7 @@
       <div class="card">
         <div class="eyebrow">SEE &times; FREE &times; GO &mdash; ACROSS PREPARE, PERFORM, PURSUE</div>
         <h3>Practice</h3>
-        <p class="muted">Choose the exercise you learned in Notion this week and log one real attempt. Short phrases are enough &mdash; the full steps stay in Notion, this is your log, not the lesson.</p>
+        <p class="muted">Choose the exercise from what you learned this week and log one real attempt. Short phrases are enough.</p>
         <form id="formModuleLog" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="mlDate">Date</label><input type="date" id="mlDate" required></div>
@@ -592,7 +585,7 @@
 
   </main>
 
-  <p class="foot-note">Train your mind. Know your patterns. Face Your Power. — Your entries stay in this browser unless you choose to export and share them. See Notion for the backup guide.</p>
+  <p class="foot-note">Train your mind. Know your patterns. Face Your Power. — Your entries stay in this browser unless you choose to export and share them. See your weekly materials for the backup guide.</p>
 </div>
 
 <!-- Settings modal -->
@@ -628,7 +621,7 @@
     {id:'go-pursue',    phase:'pursue',  name:'GO × Pursue'}
   ];
 
-  // Kick-off takes place before week 1. Notion provides the module instructions.
+  // Kick-off takes place before week 1. Weekly materials provide the module instructions.
   var WEEKS = [
     {n:1, phase:'prepare', title:'Prepare', focus:'SEE × Prepare', moduleId:'see-prepare'},
     {n:2, phase:'prepare', title:'Prepare', focus:'FREE × Prepare', moduleId:'free-prepare'},
@@ -653,7 +646,7 @@
     'Reset + Anchor':{sub:'Connect Your Regulation to Performance',when:'Once you have trained a personal anchor in GO × Prepare.',quick:'Exhale → Feel your body → Use your anchor → Access your state → Go.',steps:['Take one comfortable breath and let unnecessary tension drop.','Feel your feet and your posture.','Use the personal anchor you have already trained.','Reconnect with a useful performance state.','Take the next action without waiting for a perfect feeling.']},
     'Hum, Swallow & Return':{sub:'Find Your Center',when:'Before competition, between attempts, or whenever you have a moment to hum.',quick:'Breathe in → Hum out → Swallow normally → Eyes up → Next action.',steps:['Settle your position; soften jaw and shoulders.','Take an easy breath in through your nose.','Hum a soft “mmm” as you breathe out — do not push.','Swallow normally when the hum ends; a sip of water is optional.','Look toward your task and choose the next action.']}
   };
-  var CORE_TOOLS = ['Ask Better Questions','Assumption Check','Decision Compass','Plan the Next Move','Communication Loop (SAFE / PACE / STOP / CANT)'];
+  var CORE_TOOLS = ['Ask Better Questions','Assumption Check','Decision Compass','Plan the Next Move','Learning Engine'];
   var CORE_TOOL_GUIDES = [
     {name:'Ask Better Questions',when:'From Week 2 — whenever reflection turns into self-criticism, replaying a mistake, or feeling stuck.',what:'Catch the question you are currently asking yourself. If it leads to judgement instead of movement, ask a more useful one instead — for example “What is within my control?” or “What can I learn from this?” Then act on the answer.'},
     {name:'Assumption Check',when:'From Week 2 — alongside the belief work in Free × Prepare, or whenever one interpretation feels like the only possible truth.',what:'Name what you are currently treating as fact. Check the evidence for and against it, then ask what else could be true. You do not have to believe every conclusion your mind produces.'},
@@ -828,7 +821,7 @@
       }
       if(weekHasEntries(w.n)) node.classList.add('done');
       node.style.setProperty('--phase-color', PHASE_COLOR[w.phase]);
-      node.innerHTML = '<div class="line"></div>' +
+      node.innerHTML =
         (w.n===1?'<span class="phase-tick">Prepare</span>':'') +
         (w.n===4?'<span class="phase-tick">Bridge</span>':'') +
         (w.n===5?'<span class="phase-tick">Perform</span>':'') +
@@ -1074,15 +1067,15 @@
 
   /* ---------------- Practice ---------------- */
   var MODULE_GUIDES = {
-    'see-prepare':'Pick a recurring unhelpful thought from your preparation and a thought you would rather hear instead. Picture saying each one daily for a year and notice the difference. Full exercise in Notion.',
-    'free-prepare':'Finish the sentence “Before I compete, I have to ___.” Ask whether that is actually true or just feels true. Full belief-change exercise in Notion.',
-    'go-prepare':'Picture the old habit as a short film, stop it, and let the new behaviour and its good feeling grow for 20–30 seconds. Full 5-Marker walk and anchor-building in Notion.',
-    'see-perform':'When an unhelpful thought or reaction appears, name it — “There is the doubt” — then return to the next useful action. Full exercise on finding your earliest warning sign in Notion.',
-    'free-perform':'Use the 1:1:1 Reset after a mistake: one full breath, one small physical reset, one neutral cue word or image, then the next task. Full exercise in Notion.',
-    'go-perform':'Trigger the cue you built in GO × Prepare, say your short competition line silently, then focus only on the next action. Full sequence in Notion.',
-    'see-pursue':'Ask what result you might feel uncomfortable or guilty achieving, and write the first honest sentence that comes to mind. Full reflection in Notion.',
-    'free-pursue':'Ask whom you would feel uncomfortable outperforming, name them, and remind yourself: their path is theirs, yours is yours. Full exercise in Notion.',
-    'go-pursue':'Name one specific thing you are building next that is not simply “the next result”, and one small action this week that supports it. Full reflection in Notion.'
+    'see-prepare':'Pick a recurring unhelpful thought from your preparation and a thought you would rather hear instead. Picture saying each one daily for a year and notice the difference. Full exercise in your workbook.',
+    'free-prepare':'Finish the sentence “Before I compete, I have to ___.” Ask whether that is actually true or just feels true. Full belief-change exercise in your workbook.',
+    'go-prepare':'Picture the old habit as a short film, stop it, and let the new behaviour and its good feeling grow for 20–30 seconds. Full 5-Marker walk and anchor-building in your workbook.',
+    'see-perform':'When an unhelpful thought or reaction appears, name it — “There is the doubt” — then return to the next useful action. Full exercise on finding your earliest warning sign in your workbook.',
+    'free-perform':'Use the 1:1:1 Reset after a mistake: one full breath, one small physical reset, one neutral cue word or image, then the next task. Full exercise in your workbook.',
+    'go-perform':'Trigger the cue you built in GO × Prepare, say your short competition line silently, then focus only on the next action. Full sequence in your workbook.',
+    'see-pursue':'Ask what result you might feel uncomfortable or guilty achieving, and write the first honest sentence that comes to mind. Full reflection in your workbook.',
+    'free-pursue':'Ask whom you would feel uncomfortable outperforming, name them, and remind yourself: their path is theirs, yours is yours. Full exercise in your workbook.',
+    'go-pursue':'Name one specific thing you are building next that is not simply “the next result”, and one small action this week that supports it. Full reflection in your workbook.'
   };
   var mlSelect = document.getElementById('mlModule');
   mlSelect.innerHTML = MODULES.map(function(m){ return '<option value="'+m.id+'">'+m.name+'</option>'; }).join('');
