@@ -348,7 +348,7 @@
     <section id="overview" class="view active">
       <div class="hero">
         <div class="hero-kicker">SEE. FREE. GO.</div>
-        <h2>Train your mind like you train your body.</h2>
+        <h2>Face Your Power is a mental-performance method for elite athletes. This is your private training log. Train your mind like you train your body.</h2>
         <ul class="info-list">
           <li><strong>Quick Moment</strong> — capture it during or right after training.</li>
           <li><strong>Practice</strong> — log your weekly module, one real attempt at a time.</li>
@@ -400,7 +400,7 @@
         <form id="formModuleLog" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="mlDate">Date</label><input type="date" id="mlDate" required></div>
-            <div><label for="mlModule">What exercise did you practice?</label>
+            <div><label for="mlModule">Module</label>
               <select id="mlModule" required></select>
             </div>
           </div>
@@ -413,7 +413,7 @@
             <option>Everyday life</option>
             <option>Other</option>
           </select>
-          <label for="mlAttempt">What did you practise?</label>
+          <label for="mlAttempt">What exercise did you practice?</label>
           <textarea id="mlAttempt" placeholder="A short, specific description of your actual attempt." required></textarea>
           <label for="mlReps">Repetitions</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric">
           <label for="mlObservation">What did you notice?</label>
@@ -1739,7 +1739,7 @@
     /* --- Practice --- */
     dataSheet(wb, 'Practice', 'FACE YOUR POWER — Practice',
       'One row per practice session. Every attempt counts, however small.',
-      ['Date','Module','Situation','Repetitions','What I practised','What I noticed','What I will test next','Core Tool used'],
+      ['Date','Module','Situation','Repetitions','What exercise did I practice','What I noticed','What I will test next','Core Tool used'],
       [{width:16,type:'date'},{width:22},{width:20},{width:12},{width:36,type:'wrap'},{width:34,type:'wrap'},{width:32,type:'wrap'},{width:28}],
       state.moduleLog.map(function(e){ return [e.date||'',moduleName(e.module),e.context||'',e.reps||'',e.attempt||'',e.observation||'',e.next||'',e.coreTool||'']; }),
       {freezeCol:true}
