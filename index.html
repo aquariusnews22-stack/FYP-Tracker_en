@@ -352,6 +352,7 @@
         <ul class="info-list">
           <li><strong>Quick Moment</strong> — capture it during or right after training.</li>
           <li><strong>Practice</strong> — log your weekly module, one real attempt at a time.</li>
+          <li><strong>Regulation</strong> — reset tools for your nervous system, on demand.</li>
           <li><strong>Core Tools</strong> — Learning Engine and more, whenever you want to go deeper.</li>
           <li><strong>Deep Reflection</strong> — for a hard moment or a pattern that keeps repeating.</li>
         </ul>
@@ -495,16 +496,15 @@
           <div><strong>HOW OFTEN</strong>As needed — not after every entry.</div>
         </div>
         <ul class="info-list">
-          <li><strong>Kick-off</strong> — a first Regulation reset, and the Learning Engine.</li>
+          <li><strong>Kick-off</strong> — the Learning Engine, available from day one.</li>
           <li><strong>Week 2</strong> — Ask Better Questions & Assumption Check.</li>
-          <li><strong>Week 4</strong> — the full Regulation Bridge.</li>
           <li><strong>Perform weeks</strong> — the Communication Loop (SAFE/PACE/STOP/CANT).</li>
           <li><strong>Pursue weeks</strong> — Decision Compass & Plan the Next Move.</li>
         </ul>
       </div>
 
       <div class="card">
-        <h3>Your reference tools</h3>
+        <h3>Your Core Tools</h3>
         <div id="coreGuides" style="margin-top:8px;"></div>
       </div>
 
@@ -713,7 +713,9 @@
     {name:'Ask Better Questions',when:'From Week 2 — whenever reflection turns into self-criticism, replaying a mistake, or feeling stuck.',what:'Catch the question you are currently asking yourself. If it leads to judgement instead of movement, ask a more useful one instead — for example “What is within my control?” or “What can I learn from this?” Then act on the answer.'},
     {name:'Assumption Check',when:'From Week 2 — alongside the belief work in Free × Prepare, or whenever one interpretation feels like the only possible truth.',what:'Name what you are currently treating as fact. Check the evidence for and against it, then ask what else could be true. You do not have to believe every conclusion your mind produces.'},
     {name:'Decision Compass',when:'Pursue phase — when you are weighing a next step in sport, career or life.',what:'Recall a decision that felt aligned and one that did not. Notice the qualities of each — image, distance, clarity, body sensation. Use that internal information alongside the facts, not instead of them.'},
-    {name:'Plan the Next Move',when:'Week 10 — turning direction into action, and any time a goal feels too large or distant.',what:'Reconnect with what matters in this phase, name the next milestone, and choose the smallest useful action for this week — specific enough that you would know if it happened.'}
+    {name:'Plan the Next Move',when:'Week 10 — turning direction into action, and any time a goal feels too large or distant.',what:'Reconnect with what matters in this phase, name the next milestone, and choose the smallest useful action for this week — specific enough that you would know if it happened.'},
+    {name:'Learning Engine',when:'Kick-off — available from day one. Use it when a session or module gives you something worth learning from.',what:'EXPERIENCE → REFLECT → LEARN → ADAPT. Six short questions — Goals, Difficulties, Solutions, Surprises, How do I feel, Next. Log your reflection further down this page.'},
+    {name:'Communication Loop',when:'Perform weeks — once coach or team communication becomes relevant.',what:'SAFE, PACE, STOP and CANT — four patterns that show whether communication is moving learning forward or backward. Log a check further down this page.'}
   ];
 
   var ENGINE_STEPS = [
@@ -1042,7 +1044,7 @@
       '<div class="edit-actions"><button type="button" class="btn small save-edit">Save</button><button type="button" class="btn ghost small cancel-edit">Cancel</button></div></div>';
   }
   function actionBtns(bucket,id){
-    return '<span class="entry-actions"><button type="button" class="entry-edit" data-bucket="'+bucket+'" data-id="'+id+'">edit</button><button type="button" class="entry-del" data-bucket="'+bucket+'" data-id="'+id+'">remove</button></span>';
+    return '<span class="entry-actions"><button type="button" class="entry-del" data-bucket="'+bucket+'" data-id="'+id+'">remove</button><button type="button" class="entry-edit" data-bucket="'+bucket+'" data-id="'+id+'">edit</button></span>';
   }
   function entryTop(bucket, id, dateHtml, tagHtml){
     return '<div class="entry-top"><span class="entry-summary"><span class="entry-date">'+dateHtml+'</span>'+(tagHtml?'<span class="entry-tag">'+tagHtml+'</span>':'')+'</span><span class="entry-right">'+actionBtns(bucket,id)+'<span class="entry-chev">▾</span></span></div>';
@@ -1064,6 +1066,7 @@
     });
     container.querySelectorAll('.entry-del').forEach(function(btn){
       btn.onclick = function(){
+        if(!confirm('Delete this entry? This cannot be undone.')) return;
         var id = btn.getAttribute('data-id');
         state[bucket] = state[bucket].filter(function(e){ return e.id !== id; });
         if(editing && editing.bucket===bucket && editing.id===id) editing = null;
